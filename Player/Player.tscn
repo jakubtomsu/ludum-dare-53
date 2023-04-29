@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/placeholder.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/arrow.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 4 )
+
+[node name="Player" type="Node2D"]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="Icon" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( 9.53674e-07, -4.17233e-07 )
+z_index = 100
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="TileHighlight" type="Sprite" parent="."]
+modulate = Color( 0.611765, 0.835294, 0.980392, 0.286275 )
+position = Vector2( 17, 7 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="TileHighlight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileHighlight/Area2D"]
+shape = SubResource( 2 )
