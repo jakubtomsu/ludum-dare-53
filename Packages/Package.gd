@@ -9,14 +9,15 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 	var damp = damping if get_slide_count() == 0 else 10
 	velocity *= 1.0 / (1.0 + delta * damp)
-	
+
 	for i in range(0, get_slide_count()):
 		var col = get_slide_collision(i)
-		if col.collider.is_in_group("enemy"):
-			var b = col.collider
-			b.velocity = old_velocity
-			b.movement_factor = 0
-			print("Hey")
+		if col != null:
+			velocity = old_velocity.bounce(col.normal) * 0.2
+			if col.collider.is_in_group("enemy"):
+				var b = col.collider
+				b.velocity = old_velocity
+				b.movement_factor = 0
 
 func ease_out_bounce(x: float) -> float:
 	var n1 := 7.5625
