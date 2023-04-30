@@ -15,7 +15,7 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -26,6 +26,7 @@ extents = Vector2( 3, 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 z_index = 150
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

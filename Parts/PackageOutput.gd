@@ -6,3 +6,4 @@ func _on_Area2D_body_entered(body):
 	body.queue_free()
 	if body.is_in_group("package"):
 		Global.level.score += 1
+		Global.level.packages_left -= 1

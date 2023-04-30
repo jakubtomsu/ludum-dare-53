@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://FloorTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Packages/LargePackage.tscn" type="PackedScene" id=2]
@@ -11,6 +11,13 @@
 [ext_resource path="res://Levels/Level.gd" type="Script" id=9]
 [ext_resource path="res://Packages/NormalPackage.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Parts/LaserNoPlayer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Sprites/placeholder.png" type="Texture" id=12]
+[ext_resource path="res://Parts/Platform.gd" type="Script" id=13]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -144, 32, 0, 0, 0, 0, -144, 88, 0, 0, 0, 0, -48, 88, 0, 0, 0, 0, -144, 88, 0, 0, 0, 0, -144, 32 )
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 9 )
@@ -68,3 +75,18 @@ scale = Vector2( 1, 6.594 )
 
 [node name="LargePackage" parent="." instance=ExtResource( 2 )]
 position = Vector2( -88, 32 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="Platform" type="PathFollow2D" parent="Path2D"]
+position = Vector2( -144, 32 )
+rotation = 1.57079
+rotate = false
+script = ExtResource( 13 )
+speed = 50.0
+
+[node name="Sprite" type="Sprite" parent="Path2D/Platform"]
+scale = Vector2( 2, 2 )
+z_index = 3
+texture = ExtResource( 12 )

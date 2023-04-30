@@ -16,7 +16,7 @@ colors = PoolColorArray( 0.46875, 0.46875, 0.46875, 0.992593, 1, 1, 1, 0 )
 [node name="NormalPackage" type="KinematicBody2D" groups=["package"]]
 z_index = 200
 collision_layer = 2
-collision_mask = 2
+collision_mask = 3
 script = ExtResource( 2 )
 damping = 0.6
 

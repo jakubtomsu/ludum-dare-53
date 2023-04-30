@@ -44,18 +44,20 @@ func _process(delta):
 	elif move_dir.x < -0.1: anim_sprite.scale.x = -1.0
 	
 	if Input.is_action_just_pressed("player_grab"):
-		if grabbed == null:
+		if !is_instance_valid(grabbed):
 			if len(item_area.get_overlapping_bodies()) > 0:
-				grabbed = item_area.get_overlapping_bodies()[0]
-				if grabbed.has_method("player_start_grab"):
-					grabbed.player_start_grab()
+				var item = item_area.get_overlapping_bodies()[0]
+				if item.is_in_group("package"):
+					grabbed = item
+					if grabbed.has_method("player_start_grab"):
+						grabbed.player_start_grab()
 		else:
 			if grabbed.has_method("player_end_grab"):
 					grabbed.player_end_grab()
 			grabbed = null
 	
 	if Input.is_action_just_pressed("player_shoot"):
-		if grabbed != null:
+		if is_instance_valid(grabbed):
 			if grabbed.has_method("player_end_grab"):
 				grabbed.player_end_grab()
 			grabbed = null
@@ -70,7 +72,7 @@ func _process(delta):
 		slash.frame = 0
 		slash.play("default")
 
-	if grabbed != null:
+	if is_instance_valid(grabbed):
 		if grabbed.has_method("player_grab_pos"):
 			grabbed.player_grab_pos(global_position + aim_dir * Global.TILE_SIZE)
 	
