@@ -1,13 +1,16 @@
 extends KinematicBody2D
 
-export var move_accel: float = 20.0
-export var move_damp: float = 20.0
-export var move_dash: float = 300.0
+export var move_accel: float = 10.0
+export var move_damp: float = 16.0
+export var move_dash: float = 180.0
+export var dash_dur: float = 0.5
 
 onready var item_area = $ItemArea2D
+onready var fall_area = $FallArea
 
+var is_dashing = false
+var dash_time = 0.0
 var velocity = Vector2()
-var place_rotation: float = 0.0
 
 func _init():
 	Global.player = self
@@ -31,27 +34,43 @@ func get_move_dir() -> Vector2:
 	return move_dir
 
 func _process(delta):
-	if Input.is_action_just_pressed("player_place_rotate"):
-		place_rotation += deg2rad(90)
+	if dash_time > dash_dur:
+			is_dashing = false
+			
+	if is_dashing:
+		dash_time += delta
 	
 	var aim_dir = (get_global_mouse_position() - global_position).normalized()
-	item_area.position = aim_dir * Global.TILE_SIZE * 0.7
+	item_area.position = aim_dir * Global.TILE_SIZE * 0.8
 	
 	if Input.is_action_just_pressed("player_shoot"):
 		for b in item_area.get_overlapping_bodies():
-			b.velocity = (aim_dir + (b.global_position - global_position).normalized() * 0.5) * 100
+			b.velocity = (aim_dir + (b.global_position - global_position).normalized() * 0.1) * 100
 			if b.is_in_group("enemy"):
 				b.movement_factor = 0
+				
+	print("fall:", fall_area.get_overlapping_bodies())
+	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
+		Global.fail_level()
 
 func _physics_process(delta: float):
-	assert(Global.player == self)
-
-	var move_dir = get_move_dir()
+	# assert(Global.player == self)
+	if !is_dashing:
+		var move_dir = get_move_dir()
 	
-	if Input.is_action_just_pressed("player_dash"):
-		velocity += move_dir * move_dash
+		if Input.is_action_just_pressed("player_dash"):
+			is_dashing = true
+			velocity = move_dir * move_dash
 		
-	velocity += move_dir * move_accel
+		velocity += move_dir * move_accel
 	
-	velocity = move_and_slide(velocity)
-	velocity = apply_damping(velocity, move_damp, delta)
+		velocity = move_and_slide(velocity)
+		velocity = apply_damping(velocity, move_damp, delta)
+	else:
+		velocity = move_and_slide(velocity)
+
+
+func _on_FallArea_body_exited(body):
+	if len(fall_area.get_overlapping_bodies()) == 0:
+		return
+		Global.fail_level()

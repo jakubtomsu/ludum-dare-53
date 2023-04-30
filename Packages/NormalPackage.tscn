@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
 
-[node name="NormalPackage" type="KinematicBody2D"]
+[node name="NormalPackage" type="KinematicBody2D" groups=["package"]]
 z_index = 200
 collision_layer = 2
 collision_mask = 3

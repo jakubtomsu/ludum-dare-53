@@ -4,6 +4,9 @@ export var damping: float = 1.0
 
 var velocity = Vector2()
 
+func conveyor_belt_apply_force(force: Vector2):
+	velocity += force
+
 func _physics_process(delta):
 	var old_velocity = velocity
 	velocity = move_and_slide(velocity)
@@ -13,7 +16,7 @@ func _physics_process(delta):
 	for i in range(0, get_slide_count()):
 		var col = get_slide_collision(i)
 		if col != null:
-			velocity = old_velocity.bounce(col.normal) * 0.2
+			velocity = old_velocity.bounce(col.normal) * 0.4
 			if col.collider.is_in_group("enemy"):
 				var b = col.collider
 				b.velocity = old_velocity
