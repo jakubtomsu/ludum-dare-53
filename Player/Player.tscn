@@ -1,17 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/circle.png" type="Texture" id=2]
 [ext_resource path="res://Player/player.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/slash.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=16]
 radius = 2.0
 height = 4.0
 
 [sub_resource type="CircleShape2D" id=15]
-radius = 6.0
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 14.0357
+radius = 8.06226
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
@@ -29,10 +31,45 @@ animations = [ {
 "speed": 8.0
 } ]
 
+[sub_resource type="Gradient" id=17]
+colors = PoolColorArray( 0.508209, 0.644953, 0.714844, 1, 0.392609, 0.533472, 0.605469, 0 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 4 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=22]
+animations = [ {
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": false,
+"name": "default",
+"speed": 32.0
+} ]
+
 [node name="Player" type="Node2D"]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-collision_layer = 4
+collision_layer = 36
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -49,7 +86,7 @@ shape = SubResource( 15 )
 [node name="ItemArea2D" type="Area2D" parent="KinematicBody2D"]
 position = Vector2( 15, 0 )
 collision_layer = 0
-collision_mask = 10
+collision_mask = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/ItemArea2D"]
 position = Vector2( -2, 0 )
@@ -58,6 +95,25 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 z_index = 100
 frames = SubResource( 11 )
+frame = 1
 playing = true
 
-[connection signal="body_exited" from="KinematicBody2D/FallArea" to="KinematicBody2D" method="_on_FallArea_body_exited"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="KinematicBody2D"]
+local_coords = false
+texture = ExtResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2( 0, -1 )
+spread = 10.0
+gravity = Vector2( 0, 5 )
+initial_velocity = 5.0
+scale_amount = 0.9
+scale_amount_random = 0.95
+color_ramp = SubResource( 17 )
+
+[node name="Slash" type="AnimatedSprite" parent="KinematicBody2D"]
+visible = false
+z_index = 120
+frames = SubResource( 22 )
+
+[connection signal="animation_finished" from="KinematicBody2D/Slash" to="KinematicBody2D" method="_on_Slash_animation_finished"]

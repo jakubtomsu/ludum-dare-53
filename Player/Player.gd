@@ -2,15 +2,14 @@ extends KinematicBody2D
 
 export var move_accel: float = 10.0
 export var move_damp: float = 16.0
-export var move_dash: float = 180.0
-export var dash_dur: float = 0.5
 
 onready var item_area = $ItemArea2D
 onready var fall_area = $FallArea
+onready var slash = $Slash
+onready var anim_sprite = $AnimatedSprite
 
-var is_dashing = false
-var dash_time = 0.0
 var velocity = Vector2()
+var grabbed = null
 
 func _init():
 	Global.player = self
@@ -34,43 +33,59 @@ func get_move_dir() -> Vector2:
 	return move_dir
 
 func _process(delta):
-	if dash_time > dash_dur:
-			is_dashing = false
-			
-	if is_dashing:
-		dash_time += delta
+	if Input.is_action_just_pressed("quick_restart"):
+		Global.quick_restart()
 	
 	var aim_dir = (get_global_mouse_position() - global_position).normalized()
 	item_area.position = aim_dir * Global.TILE_SIZE * 0.8
 	
+	var move_dir = get_move_dir()
+	if move_dir.x > 0.1: anim_sprite.scale.x = 1.0
+	elif move_dir.x < -0.1: anim_sprite.scale.x = -1.0
+	
+	if Input.is_action_just_pressed("player_grab"):
+		if grabbed == null:
+			if len(item_area.get_overlapping_bodies()) > 0:
+				grabbed = item_area.get_overlapping_bodies()[0]
+				if grabbed.has_method("player_start_grab"):
+					grabbed.player_start_grab()
+		else:
+			if grabbed.has_method("player_end_grab"):
+					grabbed.player_end_grab()
+			grabbed = null
+	
 	if Input.is_action_just_pressed("player_shoot"):
+		if grabbed != null:
+			if grabbed.has_method("player_end_grab"):
+				grabbed.player_end_grab()
+			grabbed = null
 		for b in item_area.get_overlapping_bodies():
-			b.velocity = (aim_dir + (b.global_position - global_position).normalized() * 0.1) * 100
-			if b.is_in_group("enemy"):
-				b.movement_factor = 0
-				
-	print("fall:", fall_area.get_overlapping_bodies())
+			if b.has_method("player_push"):
+				b.player_push(aim_dir)
+			else:
+				velocity = -aim_dir * 300
+		slash.position = aim_dir * 5
+		slash.rotation = aim_dir.angle()
+		slash.visible = true
+		slash.frame = 0
+		slash.play("default")
+
+	if grabbed != null:
+		if grabbed.has_method("player_grab_pos"):
+			grabbed.player_grab_pos(global_position + aim_dir * Global.TILE_SIZE)
+	
 	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
 		Global.fail_level()
 
 func _physics_process(delta: float):
 	# assert(Global.player == self)
-	if !is_dashing:
-		var move_dir = get_move_dir()
+	var move_dir = get_move_dir()
 	
-		if Input.is_action_just_pressed("player_dash"):
-			is_dashing = true
-			velocity = move_dir * move_dash
-		
-		velocity += move_dir * move_accel
+	velocity += move_dir * move_accel
 	
-		velocity = move_and_slide(velocity)
-		velocity = apply_damping(velocity, move_damp, delta)
-	else:
-		velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
+	velocity = apply_damping(velocity, move_damp, delta)
 
 
-func _on_FallArea_body_exited(body):
-	if len(fall_area.get_overlapping_bodies()) == 0:
-		return
-		Global.fail_level()
+func _on_Slash_animation_finished():
+	slash.visible = false
