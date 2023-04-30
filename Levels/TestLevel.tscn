@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://FloorTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Packages/LargePackage.tscn" type="PackedScene" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Parts/LaserNoPlayer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Sprites/placeholder.png" type="Texture" id=12]
 [ext_resource path="res://Parts/Platform.gd" type="Script" id=13]
+[ext_resource path="res://UI/PauseMenu.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Parts/LaserNoPackage.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -40,6 +42,10 @@ position = Vector2( -104, -48 )
 [node name="NormalPackage4" parent="." instance=ExtResource( 10 )]
 position = Vector2( 128, 56 )
 
+[node name="LaserNoPackage" parent="." instance=ExtResource( 15 )]
+position = Vector2( -88, -16 )
+scale = Vector2( 1, 6 )
+
 [node name="WallTileMap" type="TileMap" parent="." groups=["tilemap"]]
 tile_set = ExtResource( 8 )
 cell_size = Vector2( 8, 8 )
@@ -65,6 +71,9 @@ rotation = -1.5708
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 14 )]
+visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

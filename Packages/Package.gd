@@ -46,3 +46,4 @@ func player_start_grab():
 	
 func player_end_grab():
 	is_grabbed = false
+	velocity = Vector2()
