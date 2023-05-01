@@ -11,7 +11,12 @@ func fail_level():
 	quick_restart()
 
 func quick_restart():
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _on_DeathTimer_timeout():
 	quick_restart()
+
+func change_scene(name):
+	get_tree().paused = false
+	get_tree().change_scene(name)

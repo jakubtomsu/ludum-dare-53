@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/run cycle.wav-352266f8814417e1394c0d3dacac1c2a.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/run cycle.wav"
+dest_files=[ "res://.import/run cycle.wav-352266f8814417e1394c0d3dacac1c2a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

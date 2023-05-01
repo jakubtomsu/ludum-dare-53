@@ -52,8 +52,10 @@ speed = 130
 shape = SubResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+z_index = 1
 frames = SubResource( 5 )
 animation = "b"
+frame = 1
 playing = true
 
 [node name="FallArea" type="Area2D" parent="."]

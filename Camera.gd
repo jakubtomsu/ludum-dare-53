@@ -13,10 +13,10 @@ func _ready():
 	
 func _process(delta):
 	time += delta
-	shake_strength = clamp(shake_strength - delta * 4.0, 0.0, 3.0)
+	shake_strength = clamp(shake_strength - delta * 4.0, 0.0, 1.5)
 	offset_h = noise.get_noise_1d(time * 100.0) * shake_strength
 	offset_v = noise.get_noise_1d(-time * 100.0) * shake_strength
-	rotation = noise.get_noise_1d(time * 100.0 + 10121.0) * shake_strength * 0.25
+	rotation = noise.get_noise_1d(time * 100.0 + 10121.0) * shake_strength * 0.5
 	var player_offs = (Global.player.global_position - global_position) * 0.015
 	offset_h += player_offs.x
 	offset_v += player_offs.y

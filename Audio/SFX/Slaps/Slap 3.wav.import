@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Slap 3.wav-f7090ec846cdf31ce34b99b180776fa3.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Slaps/Slap 3.wav"
+dest_files=[ "res://.import/Slap 3.wav-f7090ec846cdf31ce34b99b180776fa3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

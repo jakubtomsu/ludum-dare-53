@@ -2,12 +2,12 @@ extends KinematicBody2D
 
 export var move_accel: float = 10.0
 export var move_damp: float = 14.0
-export var max_charge_time: float = 0.5
+export var max_charge_time: float = 0.4
 export var max_health: float = 4
 
 onready var item_area = $ItemArea2D
 onready var fall_area = $FallArea
-onready var slash = $Slash
+onready var slash = item_area.get_node("Slash")
 onready var anim_sprite = $AnimatedSprite
 onready var charge_sprite = $Charge
 onready var charge_bg_sprite = $ChargeBg
@@ -18,15 +18,21 @@ var grabbed = null
 var charge_time: float = 0.0
 var last_ok_pos = Vector2()
 var time_since_damage = 0.0
+var on_conveyor_belt = false
 
-func _init():
+func _ready():
 	Global.player = self
+	slash.visible = false
 
 func apply_damping(x, damp: float, delta: float):
 	return x * (1.0 / (1.0 + damp * delta))
 
 func conveyor_belt_apply_force(force: Vector2):
 	velocity += force
+	on_conveyor_belt = true
+
+func add_health(x):
+	health = clamp(health + x, 0, max_health)
 
 func round_to_tile(x: Vector2) -> Vector2:
 	x /= Global.TILE_SIZE
@@ -55,7 +61,8 @@ func _process(delta):
 		Global.fail_level()
 
 	var aim_dir = (get_global_mouse_position() - global_position).normalized()
-	item_area.position = aim_dir * Global.TILE_SIZE * 0.8
+	item_area.position = aim_dir * Global.TILE_SIZE
+	item_area.rotation = aim_dir.angle()
 	
 	var move_dir = get_move_dir()
 	if move_dir.x > 0.1: anim_sprite.scale.x = 1.0
@@ -88,8 +95,8 @@ func _process(delta):
 				Global.cam.shake_strength += 0.1
 			else:
 				velocity = -aim_dir * 200 * (charge + 1.0)
-		slash.position = aim_dir * 5
-		slash.rotation = aim_dir.angle()
+		#slash.position = aim_dir * 5
+		#slash.rotation = aim_dir.angle()
 		slash.visible = true
 		slash.frame = 0
 		slash.play("default")
@@ -109,7 +116,8 @@ func _process(delta):
 		global_position = last_ok_pos
 		Global.cam.shake_strength += 0.5
 	else:
-		last_ok_pos = global_position - move_dir.normalized() * 20
+		if not on_conveyor_belt:
+			last_ok_pos = global_position - move_dir.normalized() * 20
 	
 	charge_sprite.visible = charge_time > 0.001
 	charge_bg_sprite.visible = charge_sprite.visible
@@ -124,6 +132,7 @@ func _physics_process(delta: float):
 	
 	velocity = move_and_slide(velocity)
 	velocity = apply_damping(velocity, move_damp, delta)
+	on_conveyor_belt = false
 
 
 func _on_Slash_animation_finished():

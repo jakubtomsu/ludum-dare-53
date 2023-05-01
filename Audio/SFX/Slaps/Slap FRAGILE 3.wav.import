@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Slap FRAGILE 3.wav-45a0319174ef5de3e484e836f013cd1b.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Slaps/Slap FRAGILE 3.wav"
+dest_files=[ "res://.import/Slap FRAGILE 3.wav-45a0319174ef5de3e484e836f013cd1b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -44,7 +44,7 @@ colors = PoolColorArray( 0.0980392, 0.0901961, 0.0862745, 1, 0.0980392, 0.090196
 
 [node name="EnemyB" type="KinematicBody2D" groups=["enemy"]]
 collision_layer = 2
-collision_mask = 6
+collision_mask = 7
 script = ExtResource( 2 )
 speed = 70
 update_rate = 1.5
@@ -53,6 +53,7 @@ update_rate = 1.5
 shape = SubResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+z_index = 1
 frames = SubResource( 5 )
 animation = "a"
 frame = 1

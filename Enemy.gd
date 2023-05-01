@@ -10,21 +10,23 @@ var velocity = Vector2()
 # like a stun factor just reversed
 var movement_factor: float = 0.0
 var path = null
-var update_timer = 0
+var update_timer = update_rate
 var destination = Vector2()
 var stun = 0.0
+var time_alive = 0.0
 
 func player_push(dir: Vector2):
-	velocity = dir * 600
+	velocity = dir * 400
 
 func kill():
 	var fx = preload("res://FallEffect.tscn").instance()
 	get_parent().add_child(fx)
 	fx.global_position = global_position
 	queue_free()
-	Global.cam.shake_strength += 0.4
+	Global.cam.shake_strength += 0.2
 
 func _process(delta):
+	time_alive += delta
 	update_timer += delta
 	if update_timer > update_rate:
 		update_timer = 0
@@ -33,7 +35,7 @@ func _process(delta):
 			destination = path[0]
 			path.remove(0)
 	
-	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
+	if len(fall_area.get_overlapping_bodies()) == 0 and time_alive > 0.5:
 		kill()
 
 	if path != null:

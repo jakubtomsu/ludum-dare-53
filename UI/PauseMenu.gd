@@ -7,9 +7,8 @@ func _process(delta):
 
 
 func _on_Button_button_down():
-	get_tree().change_scene("res://UI/MainMenu.tscn")
+	Global.change_scene("res://UI/MainMenu.tscn")
 
 
 func _on_Restart_button_down():
-	get_tree().paused = false
 	Global.quick_restart()

@@ -8,6 +8,7 @@ onready var particles = $CPUParticles2D
 
 var velocity = Vector2()
 var is_grabbed = false
+var time_alive = false
 
 func conveyor_belt_apply_force(force: Vector2):
 	velocity += force
@@ -28,11 +29,9 @@ func _process(delta):
 	z_index = 110 if global_position.y > Global.player.global_position.y else 10
 	
 	particles.emitting = velocity.length_squared() > 10
-	
-	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
-		kill()
 
 func _physics_process(delta):
+	time_alive += delta
 	if is_grabbed: return
 
 	velocity /= 1.0 + delta * damping
@@ -49,6 +48,9 @@ func _physics_process(delta):
 		if other.is_in_group("enemy"):
 			velocity = Vector2()
 			other.kill()
+	
+	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
+		kill()
 
 func player_start_grab():
 	is_grabbed = true
