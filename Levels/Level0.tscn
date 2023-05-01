@@ -24,7 +24,8 @@ time_limit = 20.0
 
 [node name="HelpText" parent="." instance=ExtResource( 5 )]
 position = Vector2( 160, 40 )
-text = "Use RMB to pick up.
+text = "Your goal is to move as many boxes to the orange area.
+Use RMB to pick up.
 Hold LMB to charge and throw."
 
 [node name="Player" parent="." instance=ExtResource( 2 )]

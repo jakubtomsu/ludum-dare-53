@@ -141,6 +141,7 @@ margin_bottom = 13.0
 text = " Level 1 "
 
 [connection signal="focus_entered" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer/AudioVolume" to="." method="_on_AudioVolume_focus_entered"]
+[connection signal="value_changed" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer/AudioVolume" to="." method="_on_AudioVolume_value_changed"]
 [connection signal="toggled" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer2/CheckBox" to="." method="_on_CheckBox_toggled"]
 [connection signal="button_down" from="MainMenu/CenterContainer/VBoxContainer/GridContainer/Level1" to="." method="_on_Level1_button_down"]
 [connection signal="mouse_entered" from="MainMenu/CenterContainer/VBoxContainer/GridContainer/Level1" to="." method="_on_Level1_mouse_entered"]

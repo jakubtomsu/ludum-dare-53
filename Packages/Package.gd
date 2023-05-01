@@ -12,6 +12,7 @@ var time_alive: float = 0.0
 
 func conveyor_belt_apply_force(force: Vector2):
 	velocity += force * 0.7
+	velocity = velocity.clamped(force.length() * 30)
 
 func player_push(dir: Vector2):
 	velocity = dir * push_force

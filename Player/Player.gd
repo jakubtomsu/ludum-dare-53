@@ -62,7 +62,7 @@ func _process(delta):
 		Global.fail_level()
 
 	var aim_dir = (get_global_mouse_position() - global_position).normalized()
-	item_area.position = aim_dir * Global.TILE_SIZE
+	item_area.position = aim_dir * Global.TILE_SIZE * 1.1
 	item_area.rotation = aim_dir.angle()
 	
 	var move_dir = get_move_dir()

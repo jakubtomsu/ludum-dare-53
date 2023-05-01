@@ -20,3 +20,7 @@ func _on_Level1_mouse_entered():
 
 func _on_Level1_button_down():
 	Global.change_scene("res://Levels/Level1.tscn")
+
+
+func _on_AudioVolume_value_changed(value):
+	AudioServer.set_bus_volume_db(0, lerp(-10, 10, value))

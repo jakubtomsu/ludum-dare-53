@@ -17,9 +17,9 @@ theme = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Control"]
 margin_left = -15.0
-margin_top = 4.0
+margin_top = -10.0
 margin_right = 200.0
-margin_bottom = 39.0
+margin_bottom = 36.0
 text = "test text"
 align = 1
 valign = 2
