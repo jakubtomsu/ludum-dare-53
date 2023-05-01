@@ -57,5 +57,5 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 rotation = 1.5708
 frames = SubResource( 10 )
-frame = 4
+frame = 3
 playing = true

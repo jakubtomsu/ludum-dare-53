@@ -43,6 +43,7 @@ func damage(damage: float):
 		health -= damage
 		time_since_damage = 0
 		Global.cam.shake_strength += damage * 0.6
+		$DamageAudio.play()
 
 func get_move_dir() -> Vector2:
 	var move_dir = Vector2()

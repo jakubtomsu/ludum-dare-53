@@ -4,38 +4,27 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://WallTileSet.tres" type="TileSet" id=3]
 [ext_resource path="res://Levels/Level.gd" type="Script" id=4]
-[ext_resource path="res://Packages/NormalPackage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Parts/PackageSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Parts/PackageOutput.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Camera.gd" type="Script" id=7]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://EnemyB.tscn" type="PackedScene" id=9]
-[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=10]
-[ext_resource path="res://UI/PauseMenu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Audio/Starting Sting.wav" type="AudioStream" id=10]
+[ext_resource path="res://Audio/Level Drone v2.wav" type="AudioStream" id=11]
 [ext_resource path="res://Parts/ConveyorBelt.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=13]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=14]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 336, 16, 336, 176, 304, 176, 296, 128, 296, 64, 288, 16, 288, 56, 288, 136, 296, 184, 232, -32, 280, -32, 280, 8, 232, 8, 224, 56, 224, 16, 296, 232, 216, 232, 216, 184, 208, 176, 176, 176, 176, 16, 216, 64, 216, 128, 224, 136 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 0, 4, 6 ), PoolIntArray( 7, 3, 2, 8 ), PoolIntArray( 9, 10, 11, 12 ), PoolIntArray( 12, 11, 5, 6, 13, 14 ), PoolIntArray( 8, 15, 16, 17, 7 ), PoolIntArray( 18, 19, 20, 21, 22 ), PoolIntArray( 20, 14, 13, 21 ), PoolIntArray( 18, 22, 23 ), PoolIntArray( 18, 23, 7, 17 ) ]
-outlines = [ PoolVector2Array( 232, -32, 232, 8, 224, 16, 176, 16, 176, 176, 208, 176, 216, 184, 216, 232, 296, 232, 296, 184, 304, 176, 336, 176, 336, 16, 288, 16, 280, 8, 280, -32 ), PoolVector2Array( 224, 56, 216, 64, 216, 128, 224, 136, 288, 136, 296, 128, 296, 64, 288, 56 ) ]
+vertices = PoolVector2Array( 336, 16, 336, 176, 328, 112, 328, 80, 320, 72, 288, 16, 320, 120, 304, 176, 296, 120, 296, 128, 288, 136, 232, 8, 232, -32, 280, -32, 280, 0, 280, 8, 224, 56, 224, 16, 296, 72, 296, 64, 288, 56, 216, 64, 216, 72, 192, 72, 176, 16, 192, 120, 216, 120, 216, 128, 176, 176, 296, 184, 296, 232, 216, 232, 216, 184, 224, 136, 208, 176, 184, 80, 184, 112 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 3, 4, 5 ), PoolIntArray( 6, 2, 1, 7 ), PoolIntArray( 8, 6, 7, 9 ), PoolIntArray( 10, 9, 7 ), PoolIntArray( 11, 12, 13, 14 ), PoolIntArray( 11, 14, 15, 16, 17 ), PoolIntArray( 4, 18, 19 ), PoolIntArray( 5, 4, 19, 20 ), PoolIntArray( 5, 20, 16, 15 ), PoolIntArray( 21, 22, 23, 24 ), PoolIntArray( 25, 26, 27, 28 ), PoolIntArray( 29, 30, 31, 32, 33 ), PoolIntArray( 24, 17, 16, 21 ), PoolIntArray( 33, 10, 7, 29 ), PoolIntArray( 33, 32, 34 ), PoolIntArray( 33, 34, 28, 27 ), PoolIntArray( 24, 23, 35 ), PoolIntArray( 28, 24, 35, 36 ), PoolIntArray( 28, 36, 25 ) ]
+outlines = [ PoolVector2Array( 232, -32, 280, -32, 280, 0, 280, 8, 288, 16, 336, 16, 336, 176, 304, 176, 296, 184, 296, 232, 216, 232, 216, 184, 208, 176, 176, 176, 176, 16, 224, 16, 232, 8 ), PoolVector2Array( 224, 56, 216, 64, 216, 72, 192, 72, 184, 80, 184, 112, 192, 120, 216, 120, 216, 128, 224, 136, 288, 136, 296, 128, 296, 120, 320, 120, 328, 112, 328, 80, 320, 72, 296, 72, 296, 64, 288, 56 ) ]
 
 [node name="Level5" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="UI" parent="." instance=ExtResource( 14 )]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 256, 96 )
-rotating = true
-current = true
-script = ExtResource( 7 )
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 256, 40 )
-
-[node name="NormalPackage2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 172, 44 )
 
 [node name="PackageOutput" parent="." instance=ExtResource( 6 )]
 position = Vector2( 256, 208 )
@@ -69,13 +58,6 @@ position = Vector2( 216, 32 )
 [node name="EnemyB" parent="Navigation" instance=ExtResource( 9 )]
 position = Vector2( 160, 96 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 10 )]
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 11 )]
-visible = false
-
 [node name="ConveyorBelt" parent="." instance=ExtResource( 12 )]
 position = Vector2( 216, 88 )
 rotation = -1.5708
@@ -91,26 +73,6 @@ rotation = -1.5708
 [node name="ConveyorBelt4" parent="." instance=ExtResource( 12 )]
 position = Vector2( 200, 88 )
 rotation = -1.5708
-
-[node name="ConveyorBelt5" parent="." instance=ExtResource( 12 )]
-position = Vector2( 184, 88 )
-rotation = -1.5708
-
-[node name="ConveyorBelt6" parent="." instance=ExtResource( 12 )]
-position = Vector2( 184, 104 )
-rotation = -1.5708
-
-[node name="ConveyorBelt7" parent="." instance=ExtResource( 12 )]
-position = Vector2( 184, 104 )
-rotation = -1.5708
-
-[node name="ConveyorBelt8" parent="." instance=ExtResource( 12 )]
-position = Vector2( 328, 88 )
-rotation = 1.5708
-
-[node name="ConveyorBelt9" parent="." instance=ExtResource( 12 )]
-position = Vector2( 328, 104 )
-rotation = 1.5708
 
 [node name="ConveyorBelt10" parent="." instance=ExtResource( 12 )]
 position = Vector2( 312, 104 )
@@ -132,4 +94,32 @@ rotation = 1.5708
 position = Vector2( 296, 104 )
 rotation = 1.5708
 
+[node name="BgMusic" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 11 )
+autoplay = true
+
+[node name="IntroSound" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 10 )
+autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 248, 120 )
+rotating = true
+current = true
+script = ExtResource( 7 )
+
 [node name="ParallaxBackground" parent="." instance=ExtResource( 13 )]
+
+[node name="UI" parent="." instance=ExtResource( 14 )]
+
+[node name="PackageSpawner" parent="." instance=ExtResource( 5 )]
+position = Vector2( 200, 40 )
+
+[node name="PackageSpawner2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 256, -8 )
+package_chance = 0.8
+
+[node name="PackageSpawner3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 312, 40 )

@@ -8,6 +8,10 @@ bg_color = Color( 0.203922, 0.466667, 0.313726, 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.203922, 0.466667, 0.313726, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.203922, 0.466667, 0.313726, 1 )

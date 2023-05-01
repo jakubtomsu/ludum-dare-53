@@ -11,10 +11,11 @@ var is_grabbed = false
 var time_alive: float = 0.0
 
 func conveyor_belt_apply_force(force: Vector2):
-	velocity += force
+	velocity += force * 0.7
 
 func player_push(dir: Vector2):
 	velocity = dir * push_force
+	$SlidingAudio.play()
 
 func player_grab_pos(pos: Vector2):
 	global_position = pos
@@ -46,8 +47,12 @@ func _physics_process(delta):
 		if other.is_in_group("package"):
 			other.velocity += old_vel * 0.5
 		if other.is_in_group("enemy"):
-			velocity = Vector2()
-			other.kill()
+			if velocity.length_squared() > 10:
+				velocity = Vector2()
+				other.kill()
+				Global.cam.shake_strength += 0.25
+		if old_vel.length_squared() > 10:
+			$HitAudio.play()
 	
 	if len(fall_area.get_overlapping_bodies()) == 0 and time_alive > 0.5:
 		kill()

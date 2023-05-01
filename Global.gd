@@ -8,7 +8,8 @@ var cam = null
 const TILE_SIZE: float = 8.0
 
 func fail_level():
-	quick_restart()
+	# quick_restart()
+	level.finish_screen.on_finish("failed")
 
 func quick_restart():
 	get_tree().paused = false

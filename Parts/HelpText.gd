@@ -1,6 +1,6 @@
 extends Node2D
 
-export var text = "Text"
+export(String, MULTILINE) var text = "Text"
 export var speed: float = 10.0
 
 onready var label = $Control/Label
