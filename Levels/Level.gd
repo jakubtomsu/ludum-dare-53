@@ -1,7 +1,6 @@
 extends Node
 
-export var next_level_name = ""
-export var time_limit = 100.0
+export var time_limit = 60.0
 onready var finish_screen = $UI/FinishScreen
 
 var score: float = 0.0
@@ -16,9 +15,6 @@ func _ready():
 
 func sec_since_start():
 	return (OS.get_ticks_msec() - start_time) / 1000.0
-
-func next_level():
-	Global.change_scene(next_level_name)
 
 func _process(delta):
 	if sec_since_start() > time_limit:

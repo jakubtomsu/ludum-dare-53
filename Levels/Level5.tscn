@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://FloorTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Parts/PackageSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Parts/PackageOutput.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Camera.gd" type="Script" id=7]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://EnemyB.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Audio/Starting Sting.wav" type="AudioStream" id=10]
 [ext_resource path="res://Audio/Level Drone v2.wav" type="AudioStream" id=11]
@@ -51,9 +50,6 @@ tile_data = PoolIntArray( -655369, 0, 0, -655368, 0, 0, -655364, 0, 0, -655363, 
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation"]
 navpoly = SubResource( 1 )
-
-[node name="Enemy" parent="Navigation" instance=ExtResource( 8 )]
-position = Vector2( 216, 32 )
 
 [node name="EnemyB" parent="Navigation" instance=ExtResource( 9 )]
 position = Vector2( 160, 96 )

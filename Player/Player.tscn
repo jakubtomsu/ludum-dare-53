@@ -109,6 +109,7 @@ playing = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 z_index = 100
 frames = SubResource( 11 )
+frame = 1
 playing = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="KinematicBody2D"]

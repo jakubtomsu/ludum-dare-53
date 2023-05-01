@@ -19,7 +19,6 @@ outlines = [ PoolVector2Array( 136, 152, 136, 248, 240, 248, 240, 176, 248, 168,
 
 [node name="Level3" type="Node2D"]
 script = ExtResource( 4 )
-time_limit = 60.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 256, 96 )
@@ -50,9 +49,12 @@ position = Vector2( 171, 212 )
 
 [node name="PackageSpawner2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 172, 44 )
+package_chance = 0.25
+enemy_chance = 0.75
 
 [node name="PackageSpawner3" parent="." instance=ExtResource( 12 )]
 position = Vector2( 340, 44 )
+package_chance = 0.7
 
 [node name="Navigation" type="Navigation2D" parent="."]
 

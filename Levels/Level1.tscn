@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://FloorTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -11,8 +11,6 @@
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Camera.gd" type="Script" id=11]
-[ext_resource path="res://EnemyB.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=13]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 264, 168, 264, 152, 280, 152, 280, 192, 256, 176, 160, 192, 160, 176, 96, 72, 80, 72, 79, 16, 152, 16, 152, 40, 104, 80, 160, 48, 160, 64, 136, 72, 288, 96, 328, 96, 328, 144, 288, 144, 256, 144, 240, 144, 240, 96, 256, 96, 152, 200, 152, 224, 80, 224, 80, 168, 96, 168, 104, 160, 136, 168, 280, 88, 264, 88, 280, 48, 264, 72, 256, 64, 152, 72, 128, 80, 128, 160, 152, 168 )
@@ -21,9 +19,10 @@ outlines = [ PoolVector2Array( 79, 16, 80, 72, 96, 72, 104, 80, 104, 160, 96, 16
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 4 )
+time_limit = 40.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 202, 45 )
+position = Vector2( 264, 120 )
 
 [node name="PackageOutput" parent="." instance=ExtResource( 6 )]
 position = Vector2( 304, 120 )
@@ -77,9 +76,3 @@ script = ExtResource( 11 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation"]
 navpoly = SubResource( 1 )
-
-[node name="Enemy" parent="Navigation" instance=ExtResource( 13 )]
-position = Vector2( 216, 32 )
-
-[node name="EnemyB" parent="Navigation" instance=ExtResource( 12 )]
-position = Vector2( 160, 96 )
