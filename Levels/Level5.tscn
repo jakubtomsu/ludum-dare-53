@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://FloorTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -12,7 +12,8 @@
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/PauseMenu.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Parts/ConveyorBelt.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Sprites/bg_checker.png" type="Texture" id=13]
+[ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=13]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=14]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 336, 16, 336, 176, 304, 176, 296, 128, 296, 64, 288, 16, 288, 56, 288, 136, 296, 184, 232, -32, 280, -32, 280, 8, 232, 8, 224, 56, 224, 16, 296, 232, 216, 232, 216, 184, 208, 176, 176, 176, 176, 16, 216, 64, 216, 128, 224, 136 )
@@ -21,6 +22,8 @@ outlines = [ PoolVector2Array( 232, -32, 232, 8, 224, 16, 176, 16, 176, 176, 208
 
 [node name="Level5" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="UI" parent="." instance=ExtResource( 14 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 256, 96 )
@@ -129,16 +132,4 @@ rotation = 1.5708
 position = Vector2( 296, 104 )
 rotation = 1.5708
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.5, 0.5 )
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = -48.0
-margin_top = -64.0
-margin_right = 424.0
-margin_bottom = 192.0
-rect_scale = Vector2( 8, 8 )
-texture = ExtResource( 13 )
-stretch_mode = 2
+[node name="ParallaxBackground" parent="." instance=ExtResource( 13 )]

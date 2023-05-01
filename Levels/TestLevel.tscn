@@ -1,17 +1,16 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://FloorTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Packages/LargePackage.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Parts/ConveyorBelt.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Parts/PackageOutput.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://WallTileSet.tres" type="TileSet" id=8]
 [ext_resource path="res://Levels/Level.gd" type="Script" id=9]
 [ext_resource path="res://Packages/NormalPackage.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Parts/HealthDrop.tscn" type="PackedScene" id=11]
-[ext_resource path="res://UI/PauseMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Camera.gd" type="Script" id=16]
 [ext_resource path="res://EnemyB.tscn" type="PackedScene" id=17]
 
@@ -63,12 +62,7 @@ position = Vector2( -67, -11 )
 position = Vector2( -40, -56 )
 rotation = -1.5708
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 14 )]
-visible = false
+[node name="UI" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 rotating = true

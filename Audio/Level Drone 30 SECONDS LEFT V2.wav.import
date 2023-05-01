@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Level Drone 30 SECONDS LEFT V2.wav-2b171cb73ed27f4b2ff8fba8d14a0830.sample"
+
+[deps]
+
+source_file="res://Audio/Level Drone 30 SECONDS LEFT V2.wav"
+dest_files=[ "res://.import/Level Drone 30 SECONDS LEFT V2.wav-2b171cb73ed27f4b2ff8fba8d14a0830.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

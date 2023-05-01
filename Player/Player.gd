@@ -68,6 +68,14 @@ func _process(delta):
 	if move_dir.x > 0.1: anim_sprite.scale.x = 1.0
 	elif move_dir.x < -0.1: anim_sprite.scale.x = -1.0
 	
+	var is_moving = move_dir.length_squared() > 0.1
+	
+	if is_moving:
+		if not $StepsAudio.playing:
+			$StepsAudio.play()
+	else:
+		$StepsAudio.stop()
+
 	if Input.is_action_just_pressed("player_grab"):
 		if !is_instance_valid(grabbed):
 			if len(item_area.get_overlapping_bodies()) > 0:
@@ -100,6 +108,7 @@ func _process(delta):
 		slash.visible = true
 		slash.frame = 0
 		slash.play("default")
+		$SlashAudio.play()
 
 	if Input.is_action_pressed("player_shoot"):
 		charge_time += delta

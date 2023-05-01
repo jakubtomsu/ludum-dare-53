@@ -1,14 +1,14 @@
 extends KinematicBody2D
 
-export var push_force: float = 200
-export var damping: float = 2.0
+export var push_force: float = 180
+export var damping: float = 3.0
 
 onready var fall_area = $FallArea
 onready var particles = $CPUParticles2D
 
 var velocity = Vector2()
 var is_grabbed = false
-var time_alive = false
+var time_alive: float = 0.0
 
 func conveyor_belt_apply_force(force: Vector2):
 	velocity += force
@@ -49,7 +49,7 @@ func _physics_process(delta):
 			velocity = Vector2()
 			other.kill()
 	
-	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
+	if len(fall_area.get_overlapping_bodies()) == 0 and time_alive > 0.5:
 		kill()
 
 func player_start_grab():

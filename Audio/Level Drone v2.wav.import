@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Level Drone v2.wav-7a9e1743d5f6c303e96dd381b33a04cd.sample"
+
+[deps]
+
+source_file="res://Audio/Level Drone v2.wav"
+dest_files=[ "res://.import/Level Drone v2.wav-7a9e1743d5f6c303e96dd381b33a04cd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
