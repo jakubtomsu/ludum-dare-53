@@ -18,13 +18,19 @@ func player_push(dir: Vector2):
 func player_grab_pos(pos: Vector2):
 	global_position = pos
 
+func kill():
+	var fx = preload("res://FallEffect.tscn").instance()
+	get_parent().add_child(fx)
+	fx.global_position = global_position
+	queue_free()
+	
 func _process(delta):
 	z_index = 110 if global_position.y > Global.player.global_position.y else 10
 	
 	particles.emitting = velocity.length_squared() > 10
 	
 	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
-		queue_free()
+		kill()
 
 func _physics_process(delta):
 	if is_grabbed: return
@@ -40,6 +46,9 @@ func _physics_process(delta):
 		var other = first.collider
 		if other.is_in_group("package"):
 			other.velocity += old_vel * 0.5
+		if other.is_in_group("enemy"):
+			velocity = Vector2()
+			other.kill()
 
 func player_start_grab():
 	is_grabbed = true

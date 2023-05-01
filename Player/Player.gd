@@ -1,15 +1,23 @@
 extends KinematicBody2D
 
 export var move_accel: float = 10.0
-export var move_damp: float = 16.0
+export var move_damp: float = 14.0
+export var max_charge_time: float = 0.5
+export var max_health: float = 4
 
 onready var item_area = $ItemArea2D
 onready var fall_area = $FallArea
 onready var slash = $Slash
 onready var anim_sprite = $AnimatedSprite
+onready var charge_sprite = $Charge
+onready var charge_bg_sprite = $ChargeBg
 
+var health = max_health
 var velocity = Vector2()
 var grabbed = null
+var charge_time: float = 0.0
+var last_ok_pos = Vector2()
+var time_since_damage = 0.0
 
 func _init():
 	Global.player = self
@@ -24,6 +32,12 @@ func round_to_tile(x: Vector2) -> Vector2:
 	x /= Global.TILE_SIZE
 	return Vector2(floor(x.x) + 0.5, floor(x.y) + 0.5) * Global.TILE_SIZE
 
+func damage(damage: float):
+	if time_since_damage > 0.1:
+		health -= damage
+		time_since_damage = 0
+		Global.cam.shake_strength += damage * 0.6
+
 func get_move_dir() -> Vector2:
 	var move_dir = Vector2()
 	if Input.is_action_pressed("player_move_left"): move_dir.x -= 1.0
@@ -35,7 +49,11 @@ func get_move_dir() -> Vector2:
 func _process(delta):
 	if Input.is_action_just_pressed("quick_restart"):
 		Global.quick_restart()
-	
+	time_since_damage += delta
+
+	if health <= 0:
+		Global.fail_level()
+
 	var aim_dir = (get_global_mouse_position() - global_position).normalized()
 	item_area.position = aim_dir * Global.TILE_SIZE * 0.8
 	
@@ -56,34 +74,53 @@ func _process(delta):
 					grabbed.player_end_grab()
 			grabbed = null
 	
-	if Input.is_action_just_pressed("player_shoot"):
+	var charge = clamp(charge_time, 0, max_charge_time)
+	
+	if Input.is_action_just_released("player_shoot"):
+		Global.cam.shake_strength += charge * 0.4 / max_charge_time
 		if is_instance_valid(grabbed):
 			if grabbed.has_method("player_end_grab"):
 				grabbed.player_end_grab()
 			grabbed = null
 		for b in item_area.get_overlapping_bodies():
 			if b.has_method("player_push"):
-				b.player_push(aim_dir)
+				b.player_push(aim_dir * charge)
+				Global.cam.shake_strength += 0.1
 			else:
-				velocity = -aim_dir * 300
+				velocity = -aim_dir * 200 * (charge + 1.0)
 		slash.position = aim_dir * 5
 		slash.rotation = aim_dir.angle()
 		slash.visible = true
 		slash.frame = 0
 		slash.play("default")
 
+	if Input.is_action_pressed("player_shoot"):
+		charge_time += delta
+	else:
+		charge_time = 0.0
+
 	if is_instance_valid(grabbed):
 		if grabbed.has_method("player_grab_pos"):
 			grabbed.player_grab_pos(global_position + aim_dir * Global.TILE_SIZE)
 	
 	if len(fall_area.get_overlapping_bodies()) == 0 and Global.level.sec_since_start() > 1:
-		Global.fail_level()
+		# Global.fail_level()
+		damage(1)
+		global_position = last_ok_pos
+		Global.cam.shake_strength += 0.5
+	else:
+		last_ok_pos = global_position - move_dir.normalized() * 20
+	
+	charge_sprite.visible = charge_time > 0.001
+	charge_bg_sprite.visible = charge_sprite.visible
+	charge_sprite.scale.x = lerp(0, charge_bg_sprite.scale.x, charge / max_charge_time)
 
 func _physics_process(delta: float):
 	# assert(Global.player == self)
 	var move_dir = get_move_dir()
 	
-	velocity += move_dir * move_accel
+	if time_since_damage > 0.25:
+		velocity += move_dir * move_accel
 	
 	velocity = move_and_slide(velocity)
 	velocity = apply_damping(velocity, move_damp, delta)

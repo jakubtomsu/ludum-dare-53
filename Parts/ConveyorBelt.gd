@@ -1,6 +1,6 @@
 extends Node2D
 
-export var strength: float = 8.0
+export var strength: float = 6.0
 
 onready var area = $Area2D
 

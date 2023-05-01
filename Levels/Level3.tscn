@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://FloorTileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://WallTileSet.tres" type="TileSet" id=3]
+[ext_resource path="res://Levels/Level.gd" type="Script" id=4]
+[ext_resource path="res://Packages/NormalPackage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Parts/PackageOutput.tscn" type="PackedScene" id=6]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 232, 48 )
+
+[node name="NormalPackage2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 232, 72 )
+
+[node name="PackageOutput" parent="." instance=ExtResource( 6 )]
+position = Vector2( 184, 80 )
+
+[node name="WallTileMap" type="TileMap" parent="." groups=["tilemap"]]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 8
+show_collision = true
+collision_layer = 17
+format = 1
+tile_data = PoolIntArray( 393210, 4, 0, 393211, 4, 0, 393212, 6, 0, 524278, 11, 0, 524279, 11, 0, 589813, 11, 0, 786421, 11, 0, 786422, 11, 0, 786423, 11, 0, 786424, 11, 0, 786425, 11, 0, 786426, 12, 0, 786427, 13, 0, 851957, 11, 0, 851958, 11, 0, 851959, 11, 0, 851960, 11, 0, 851961, 11, 0, 851962, 11, 0, 851963, 11, 0, 851964, 11, 0 )
+
+[node name="FloorTileMap" type="TileMap" parent="." groups=["tilemap"]]
+z_index = -100
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 8
+collision_layer = 16
+collision_mask = 16
+format = 1
+tile_data = PoolIntArray( -655369, 0, 0, -655368, 0, 0, -655364, 0, 0, -655363, 0, 0, -655362, 0, 0, -655361, 0, 0, -720896, 0, 0, -720895, 0, 0, -720894, 0, 0, -720893, 0, 0, -720892, 0, 0, -720891, 0, 0, -720890, 0, 0, -720889, 0, 0, -720888, 0, 0, -720887, 0, 0, -720886, 0, 0, -720885, 0, 0, -589830, 0, 0, 196605, 0, 0, 196606, 0, 0, 262142, 2, 0, 262143, 1, 0, 196608, 1, 0, 327678, 1, 0, 327679, 8, 0, 655357, 1, 0, 720885, 11, 0, 720886, 11, 0, 720887, 11, 0, 786421, 11, 0, 786422, 11, 0, 786423, 11, 0, 786424, 11, 0, 786425, 11, 0, 786431, 11, 0, 851957, 11, 0, 851958, 11, 0, 851959, 11, 0, 851960, 11, 0, 851961, 11, 0, 851962, 11, 0, 851963, 11, 0, 851964, 11, 0, 851965, 11, 0, 851966, 11, 0, 851967, 11, 0 )

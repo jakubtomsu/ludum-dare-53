@@ -18,7 +18,8 @@ z_index = 200
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 2 )
-damping = 0.6
+push_force = 350.0
+damping = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

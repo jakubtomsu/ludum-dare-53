@@ -1,8 +1,8 @@
 extends Control
 
-onready var score = $Score
+onready var hearts = $Hearts
 onready var time = $Time
 
 func _process(delta):
-	score.text = "Score: " + str(int(Global.level.score))
+	hearts.rect_size.x = 10 * ceil(Global.player.health)
 	time.text = "Time: " + str(stepify(Global.level.sec_since_start(), 0.01))

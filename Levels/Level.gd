@@ -11,3 +11,4 @@ func _ready():
 
 func sec_since_start():
 	return (OS.get_ticks_msec() - start_time) / 1000.0
+
