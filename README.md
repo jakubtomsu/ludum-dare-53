@@ -17,3 +17,6 @@ A Topdown action-focused combat game where you use packages to fight.
 - [Things Digital font](https://befonts.com/things-digital-font.html)
 
 ## Screenshots
+![screenshot](Sprites/Screenshot_1.png)
+
+![screenshot](Sprites/Screenshot_2.png)
